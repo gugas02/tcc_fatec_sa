@@ -5,7 +5,7 @@ import serial
 
 
 class Obd(object):
-    resposta = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    resposta = [1,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ser = serial.Serial("COM4", 38400, timeout=1)
 
     def configura_comm(self):
@@ -50,11 +50,11 @@ class Obd(object):
             for i in range(len(value)):
                 result += value[i]
             result = result/len(value)
-            self.resposta[0] = 1
+            self.resposta[1] = 1
             print('Temperatura do Fluido de Arrefecimento: %d °C', result)
             return result
         else:
-            self.resposta[0] = 0
+            self.resposta[1] = 0
 
     def turbo(self):
         aux = []
@@ -75,11 +75,11 @@ class Obd(object):
             for i in range(len(value)):
                 result += value[i]
             result = result/len(value)
-            self.resposta[1] = 1
+            self.resposta[2] = 1
             print('Pressão do turbo: %d kPa', result)
             return result
         else:
-            self.resposta[1] = 0
+            self.resposta[2] = 0
 
     def sensor_map(self):
         aux = []
@@ -100,11 +100,11 @@ class Obd(object):
             for i in range(len(value)):
                 result += value[i]
             result = result/len(value)
-            self.resposta[2] = 1
+            self.resposta[3] = 1
             print('Pressão no coletor de admissão: %d kPa', result)
             return result
         else:
-            self.resposta[2] = 0
+            self.resposta[3] = 0
 
     def eat(self):
         aux = []
@@ -126,11 +126,11 @@ class Obd(object):
             for i in range(len(value)):
                 result += value[i]
             result = result/len(value)
-            self.resposta[3] = 1
+            self.resposta[4] = 1
             print('Temperatura do ar na admissão: %d °C', result)
             return result
         else:
-            self.resposta[3] = 0
+            self.resposta[4] = 0
 
     def ip(self):
         aux = []
@@ -152,11 +152,11 @@ class Obd(object):
             for i in range(len(value)):
                 result += value[i]
             result = result/len(value)
-            self.resposta[4] = 1
+            self.resposta[5] = 1
             print('Ponto de ignição: %d °APMS', result)
             return result
         else:
-            self.resposta[4] = 0
+            self.resposta[5] = 0
 
     def maf(self):
         aux = []
@@ -178,11 +178,11 @@ class Obd(object):
             for i in range(len(value)):
                 result += value[i]
             result = result/len(value)
-            self.resposta[5] = 1
+            self.resposta[6] = 1
             print('O fluxo de ar no coletor de admissão é de: %d g/s', result)
             return result
         else:
-            self.resposta[5] = 0
+            self.resposta[6] = 0
 
     def nvl_comb(self):
         aux = []
@@ -204,11 +204,11 @@ class Obd(object):
             for i in range(len(value)):
                 result += value[i]
             result = result/len(value)
-            self.resposta[6] = 1
+            self.resposta[7] = 1
             print('nivel de combustivel: %d %', result)
             return result
         else:
-            self.resposta[6] = 0
+            self.resposta[7] = 0
 
     def eot(self):
         aux = []
@@ -230,11 +230,11 @@ class Obd(object):
             for i in range(len(value)):
                 result += value[i]
             result = result/len(value)
-            self.resposta[7] = 1
+            self.resposta[8] = 1
             print('Temperatura do óleo do motor: %d °C', result)
             return result
         else:
-            self.resposta[7] = 0
+            self.resposta[8] = 0
 
     def re(self):
         aux = []
@@ -256,11 +256,11 @@ class Obd(object):
             for i in range(len(value)):
                 result += value[i]
             result = result/len(value)
-            self.resposta[8] = 1
+            self.resposta[9] = 1
             print('Relação estequiométrica: %d °C', result)
             return result
         else:
-            self.resposta[8] = 0
+            self.resposta[9] = 0
 
     def cr(self):
         aux = []
@@ -295,14 +295,14 @@ class Obd(object):
             for i in range(len(value1)):
                 result1 += value1[i]
             result1 = result1 / len(value1)
-            self.resposta[9] = 1
+            self.resposta[10] = 1
             print('Veleocidade instantânea: %d Km/h', result1)
             result2 = result/result1
             return result2
         else:
-            self.resposta[9] = 0
+            self.resposta[10] = 0
 
-    def slambda(self):
+    def dtc(self):
         aux = []
         result = 0
         for i in range(10):
@@ -322,8 +322,27 @@ class Obd(object):
             for i in range(len(value)):
                 result += value[i]
             result = result/len(value)
-            self.resposta[8] = 1
+            self.resposta[11] = 1
             print('Relação estequiométrica: %d °C', result)
             return result
         else:
-            self.resposta[8] = 0
+            self.resposta[11] = 0
+    def getvalue(self):
+        sensors = [
+            self.ect(),
+            self.turbo(),
+            self.sensor_map(),
+            self.eat(),
+            self.ip(),
+            self.maf(),
+            self.nvl_comb(),
+            self.eot(),
+            self.re(),
+            self.cr(),
+            self.slambda()
+        ]
+        for i in range(len(sensors)):
+            if sensors[i] == None:
+                sensors.pop(i)
+
+        return sensors
