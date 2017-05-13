@@ -7,7 +7,6 @@ import serial
 class Obd(object):
     resposta = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ser = serial.Serial("COM4", 38400, timeout=1)
-    
 
     def configura_comm(self):
         if self.ser.isOpen():
