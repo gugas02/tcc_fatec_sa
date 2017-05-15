@@ -22,7 +22,7 @@ class Server(object):
 
     @staticmethod
     def login(user, senha):
-        url = 'http://gugas02.pythonanywhere.com/login'
+        url = 'http://gugas02.pythonanywhere.com/loginapi'
         payload = {
             'user': user,
             'senha': senha
@@ -33,7 +33,7 @@ class Server(object):
             soup = BeautifulSoup.BeautifulSoup(html_data)
             status = soup.find(attrs={'name': 'status'}).get('value')
             if status == "success":
-                user_id = soup.find(attrs={'name': 'user_id'}).get('value')
+                user_id = soup.find(attrs={'name': 'expression'}).get('value')
                 return user_id
             else:
                 return True

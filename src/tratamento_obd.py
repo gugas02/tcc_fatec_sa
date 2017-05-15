@@ -5,8 +5,15 @@ import serial
 
 
 class Obd(object):
-    resposta = [1,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    ser = serial.Serial("COM4", 38400, timeout=1)
+
+    def __init__(self, porta, baudrate):
+        self.porta = porta
+        self.baud = baudrate
+
+    baud = 0
+    porta = ""
+    resposta = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ser = serial.Serial(porta, baud, timeout=1)
 
     def configura_comm(self):
         if self.ser.isOpen():
@@ -270,7 +277,7 @@ class Obd(object):
         for i in range(10):
             for j in range(10):
                 self.ser.flush()
-                self.ser.write(b'015D\r')
+                self.ser.write(b'015E\r')
                 time.sleep(0.2)
                 value_read = self.ser.read(1024)
                 self.ser.flush()
@@ -327,22 +334,23 @@ class Obd(object):
             return result
         else:
             self.resposta[11] = 0
+
     def getvalue(self):
         sensors = [
-            self.ect(),
-            self.turbo(),
-            self.sensor_map(),
-            self.eat(),
-            self.ip(),
-            self.maf(),
-            self.nvl_comb(),
-            self.eot(),
-            self.re(),
-            self.cr(),
-            self.slambda()
+            str(self.ect()),
+            str(self.turbo()),
+            str(self.sensor_map()),
+            str(self.eat()),
+            str(self.ip()),
+            str(self.maf()),
+            str(self.nvl_comb()),
+            str(self.eot()),
+            str(self.re()),
+            str(self.cr()),
+            str(self.dtc())
         ]
         for i in range(len(sensors)):
-            if sensors[i] == None:
+            if sensors[i] is None:
                 sensors.pop(i)
 
-        return sensors
+        return [sensors, self.resposta]
