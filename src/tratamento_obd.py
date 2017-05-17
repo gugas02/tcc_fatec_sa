@@ -47,7 +47,10 @@ class Obd(object):
                 time.sleep(0.2)
                 value_read = self.ser.read(1024)
                 if value_read != 'NO DATA':
-                    value = [value_read[(len(value_read) - 2)::1]]
+                    value_read = value_read.replace(" ", "")
+                    b = value_read.find("\\r\\r")
+                    a = (value_read.find('41')) + 4
+                    value = value_read[a:b]
                     break
             if value[i] != 'NO DATA':
                 value[i] = int(value[i])
@@ -73,7 +76,10 @@ class Obd(object):
                 time.sleep(0.2)
                 value_read = self.ser.read(1024)
                 if value_read != 'NO DATA':
-                    value = [value_read[(len(value_read) - 6)::1]]
+                    value_read = value_read.replace(" ", "")
+                    b = value_read.find("\\r\\r")
+                    a = (value_read.find('41')) + 4
+                    value = value_read[a:b]
                     break
             if value[i] != 'NO DATA':
                 value[i] = int(value[i])
@@ -98,7 +104,10 @@ class Obd(object):
                 time.sleep(0.2)
                 value_read = self.ser.read(1024)
                 if value_read != 'NO DATA':
-                    value = [value_read[(len(value_read) - 2)::1]]
+                    value_read = value_read.replace(" ", "")
+                    b = value_read.find("\\r\\r")
+                    a = (value_read.find('41')) + 4
+                    value = value_read[a:b]
                     break
             if value[i] != 'NO DATA':
                 value[i] = int(value[i])
@@ -123,7 +132,10 @@ class Obd(object):
                 time.sleep(0.2)
                 value_read = self.ser.read(1024)
                 if value_read != 'NO DATA':
-                    value = [value_read[(len(value_read) - 2)::1]]
+                    value_read = value_read.replace(" ", "")
+                    b = value_read.find("\\r\\r")
+                    a = (value_read.find('41')) + 4
+                    value = value_read[a:b]
                     break
             if value[i] != 'NO DATA':
                 value[i] = int(value[i])
@@ -149,7 +161,10 @@ class Obd(object):
                 time.sleep(0.2)
                 value_read = self.ser.read(1024)
                 if value_read != 'NO DATA':
-                    value = [value_read[(len(value_read) - 2)::1]]
+                    value_read = value_read.replace(" ", "")
+                    b = value_read.find("\\r\\r")
+                    a = (value_read.find('41')) + 4
+                    value = value_read[a:b]
                     break
             if value[i] != 'NO DATA':
                 value[i] = int(value[i])
@@ -175,7 +190,10 @@ class Obd(object):
                 time.sleep(0.2)
                 value_read = self.ser.read(1024)
                 if value_read != 'NO DATA':
-                    value = [value_read[(len(value_read) - 4)::1]]
+                    value_read = value_read.replace(" ", "")
+                    b = value_read.find("\\r\\r")
+                    a = (value_read.find('41')) + 4
+                    value = value_read[a:b]
                     break
             if value[i] != 'NO DATA':
                 value[i] = int(value[i])
@@ -201,7 +219,10 @@ class Obd(object):
                 time.sleep(0.2)
                 value_read = self.ser.read(1024)
                 if value_read != 'NO DATA':
-                    value = [value_read[(len(value_read) - 2)::1]]
+                    value_read = value_read.replace(" ", "")
+                    b = value_read.find("\\r\\r")
+                    a = (value_read.find('41')) + 4
+                    value = value_read[a:b]
                     break
             if value[i] != 'NO DATA':
                 value[i] = int(value[i])
@@ -227,7 +248,10 @@ class Obd(object):
                 time.sleep(0.2)
                 value_read = self.ser.read(1024)
                 if value_read != 'NO DATA':
-                    value = [value_read[(len(value_read) - 2)::1]]
+                    value_read = value_read.replace(" ", "")
+                    b = value_read.find("\\r\\r")
+                    a = (value_read.find('41')) + 4
+                    value = value_read[a:b]
                     break
             if value[i] != 'NO DATA':
                 value[i] = int(value[i])
@@ -253,7 +277,10 @@ class Obd(object):
                 time.sleep(0.2)
                 value_read = self.ser.read(1024)
                 if value_read != 'NO DATA':
-                    value = [value_read[(len(value_read) - 2)::1]]
+                    value_read = value_read.replace(" ", "")
+                    b = value_read.find("\\r\\r")
+                    a = (value_read.find('41')) + 4
+                    value = value_read[a:b]
                     break
             if value[i] != 'NO DATA':
                 value[i] = int(value[i])
@@ -285,8 +312,14 @@ class Obd(object):
                 time.sleep(0.2)
                 value_read1 = self.ser.read(1024)
                 if value_read != 'NO DATA' and value_read1 != 'NO DATA':
-                    value = [value_read[(len(value_read) - 4)::1]]
-                    value1 = [value_read1[(len(value_read1) - 2)::1]]
+                    value_read = value_read.replace(" ", "")
+                    b = value_read.find("\\r\\r")
+                    a = (value_read.find('41')) + 4
+                    value = value_read[a:b]
+                    value_read1 = value_read1.replace(" ", "")
+                    b = value_read1.find("\\r\\r")
+                    a = (value_read1.find('41')) + 4
+                    value1 = value_read1[a:b]
                     break
             if value[i] != 'NO DATA' and value1[i] != 'NO DATA':
                 value[i] = int(value[i])
@@ -312,23 +345,17 @@ class Obd(object):
     def dtc(self):
         aux = []
         result = 0
-        for i in range(10):
-            for j in range(10):
-                self.ser.flush()
-                self.ser.write(b'03\r')
-                time.sleep(0.2)
-                value_read = self.ser.read(1024)
-                if value_read != 'NO DATA':
-                    value = [value_read[(len(value_read) - 12)::1]]
-                    break
-            if value[i] != 'NO DATA':
-                value[i] = bin(int(value[i]))
-                value[i] = (0.78125 * value[i]) - 100
-                aux.append(value[i])
-        if len(value) != 0:
-            for i in range(len(value)):
-                result += value[i]
-            result = result/len(value)
+        self.ser.flush()
+        self.ser.write(b'03\r')
+        time.sleep(0.2)
+        value_read = self.ser.read(1024)
+        if value_read != 'NO DATA':
+            value_read = value_read.replace(" ", "")
+            b = value_read.find("\\r\\r")
+            a = (value_read.find('43')) + 4
+            value = value_read[a:b]
+            value = bin(int(value))
+
             self.resposta[11] = 1
             print('Relação estequiométrica: %d °C', result)
             return result
