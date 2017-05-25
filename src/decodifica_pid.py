@@ -1,173 +1,61 @@
-def decodifica_pid(str):
-    pid = ''
-    x = input('falha:')
-    # verifica se o dtc possui o tamanho certo
-    if len(x) == 16:
-        # indica o 1 digito do dtc
-        if x[0] == '0' and x[1] == '0':
-            pid += 'P'
-        elif x[0] == '0' and x[1] == '1':
-            pid += 'C'
-        elif x[0] == '1' and x[1] == '0':
-            pid += 'B'
-        else:
-            pid += 'U'
-        # indica o 2 digito do dtc
-        if x[2] == '0' and x[3] == '0':
-            pid += '0'
-        elif x[2] == '0' and x[3] == '1':
-            pid += '1'
-        elif x[2] == '1' and x[3] == '0':
-            pid += '2'
-        elif x[2] == '1' and x[3] == '1':
-            pid += '3'
-# indica o 3 digito do dtc
-        if x[4] == '0' and x[5] == '0' and x[6] == '0' and x[7] == '0':
-            pid += '0'
+class Decodifica(object):
+    def __init__(self, cod):
+        self.pid = ''
+        self.tipo = ""
+        self.tamanho = ""
+        self.index = ""
+        self.x = cod
+        self.get_tipo(self.x[:4])
+        self.get_tamanho(self.x)
 
-        elif x[4] == '0' and x[5] == '0' and x[6] == '0' and x[7] == '1':
-            pid += '1'
 
-        elif x[4] == '0' and x[5] == '0' and x[6] == '1' and x[7] == '0':
-            pid += '2'
 
-        elif x[4] == '0' and x[5] == '0' and x[6] == '1' and x[7] == '1':
-            pid += '3'
+# decodifica o pid e recebe apenas 8 bits correspondentes ao pid,
+# ou seja, a mensagem deve ser cortada antes desse metodo ser utilizado
+    def get_pid(self, a):
+        b = a[:2]
+        if b == "00":
+            self.pid += 'P'
+        elif b == "01":
+            self.pid += 'C'
+        elif b == "10":
+            self.pid += 'B'
+        elif b == "11":
+            self.pid += 'U'
+        # segundo caractere dtc
+        pid = self.pid + str(int(a[2:4], 2))
+        # terceiro caractere dtc
+        b = hex(int(a[4:8], 2))
+        b = b[2:]
+        pid = pid + b
+        # quarto caractere dtc
+        b = hex(int(a[8:12], 2))
+        b = b[2:]
+        pid = pid + b
+        # quinto caractere dtc
+        b = hex(int(a[12:16], 2))
+        b = b[2:]
+        pid = pid + b
+        return pid
 
-        elif x[4] == '0' and x[5] == '1' and x[6] == '0' and x[7] == '0':
-            pid += '4'
+# verifica o tipo da mensagem, apenas 4 bits correspondentes ao pid,
+# ou seja, a mensagem deve ser cortada antes desse metodo ser chamado
+    def get_tipo(self, bits):
+        if bits == "0000":
+            self.tipo = "single frame"
 
-        elif x[4] == '0' and x[5] == '1' and x[6] == '0' and x[7] == '1':
-            pid += '5'
+        elif bits == "0001":
+            self.tipo = "first frame"
 
-        elif x[4] == '0' and x[5] == '1' and x[6] == '1' and x[7] == '0':
-            pid += '6'
+        elif bits == "0010":
+            self.tipo = "consecutive frame"
 
-        elif x[4] == '0' and x[5] == '1' and x[6] == '1' and x[7] == '1':
-            pid += '7'
+        elif bits == "0011":
+            self.tipo = "flow frame"
 
-        elif x[4] == '1' and x[5] == '0' and x[6] == '0' and x[7] == '0':
-            pid += '8'
-
-        elif x[4] == '1' and x[5] == '0' and x[6] == '0' and x[7] == '1':
-            pid += '9'
-
-        elif x[4] == '1' and x[5] == '0' and x[6] == '1' and x[7] == '0':
-            pid += 'A'
-
-        elif x[4] == '1' and x[5] == '0' and x[6] == '1' and x[7] == '1':
-            pid += 'B'
-
-        elif x[4] == '1' and x[5] == '1' and x[6] == '0' and x[7] == '0':
-            pid += 'C'
-
-        elif x[4] == '1' and x[5] == '1' and x[6] == '0' and x[7] == '1':
-            pid += 'D'
-
-        elif x[4] == '1' and x[5] == '1' and x[6] == '1' and x[7] == '0':
-            pid += 'E'
-
-        elif x[4] == '1' and x[5] == '1' and x[6] == '1' and x[7] == '1':
-            pid += 'F'
-
-        # indica o 4 digito do dtc
-
-        if x[8] == '0' and x[9] == '0' and x[10] == '0' and x[11] == '0':
-            pid += '0'
-
-        elif x[8] == '0' and x[9] == '0' and x[10] == '0' and x[11] == '1':
-            pid += '1'
-
-        elif x[8] == '0' and x[9] == '0' and x[10] == '1' and x[11] == '0':
-            pid += '2'
-
-        elif x[8] == '0' and x[9] == '0' and x[10] == '1' and x[11] == '1':
-            pid += '3'
-
-        elif x[8] == '0' and x[9] == '1' and x[10] == '0' and x[11] == '0':
-            pid += '4'
-
-        elif x[8] == '0' and x[9] == '1' and x[10] == '0' and x[11] == '1':
-            pid += '5'
-
-        elif x[8] == '0' and x[9] == '1' and x[10] == '1' and x[11] == '0':
-            pid += '6'
-
-        elif x[8] == '0' and x[9] == '1' and x[10] == '1' and x[11] == '1':
-            pid += '7'
-
-        elif x[8] == '1' and x[9] == '0' and x[10] == '0' and x[11] == '0':
-            pid += '8'
-
-        elif x[8] == '1' and x[9] == '0' and x[10] == '0' and x[11] == '1':
-            pid += '9'
-
-        elif x[8] == '1' and x[9] == '0' and x[10] == '1' and x[11] == '0':
-            pid += 'A'
-
-        elif x[8] == '1' and x[9] == '0' and x[10] == '1' and x[11] == '1':
-            pid += 'B'
-
-        elif x[8] == '1' and x[9] == '1' and x[10] == '0' and x[11] == '0':
-            pid += 'C'
-
-        elif x[8] == '1' and x[9] == '1' and x[10] == '0' and x[11] == '1':
-            pid += 'D'
-
-        elif x[8] == '1' and x[9] == '1' and x[10] == '1' and x[11] == '0':
-            pid += 'E'
-
-        elif x[8] == '1' and x[9] == '1' and x[10] == '1' and x[11] == '1':
-            pid += 'F'
-
-        # indica o 5 digito do dtc
-
-        if x[12] == '0' and x[13] == '0' and x[14] == '0' and x[15] == '0':
-            pid += '0'
-
-        elif x[12] == '0' and x[13] == '0' and x[14] == '0' and x[15] == '1':
-            pid += '1'
-
-        elif x[12] == '0' and x[13] == '0' and x[14] == '1' and x[15] == '0':
-            pid += '2'
-
-        elif x[12] == '0' and x[13] == '0' and x[14] == '1' and x[15] == '1':
-            pid += '3'
-
-        elif x[12] == '0' and x[13] == '1' and x[14] == '0' and x[15] == '0':
-            pid += '4'
-
-        elif x[12] == '0' and x[13] == '1' and x[14] == '0' and x[15] == '1':
-            pid += '5'
-
-        elif x[12] == '0' and x[13] == '1' and x[14] == '1' and x[15] == '0':
-            pid += '6'
-
-        elif x[12] == '0' and x[13] == '1' and x[14] == '1' and x[15] == '1':
-            pid += '7'
-
-        elif x[12] == '1' and x[13] == '0' and x[14] == '0' and x[15] == '0':
-            pid += '8'
-
-        elif x[12] == '1' and x[13] == '0' and x[14] == '0' and x[15] == '1':
-            pid += '9'
-
-        elif x[12] == '1' and x[13] == '0' and x[14] == '1' and x[15] == '0':
-            pid += 'A'
-
-        elif x[12] == '1' and x[13] == '0' and x[14] == '1' and x[15] == '1':
-            pid += 'B'
-
-        elif x[12] == '1' and x[13] == '1' and x[14] == '0' and x[15] == '0':
-            pid += 'C'
-
-        elif x[12] == '1' and x[13] == '1' and x[14] == '0' and x[15] == '1':
-            pid += 'D'
-
-        elif x[12] == '1' and x[13] == '1' and x[14] == '1' and x[15] == '0':
-            pid += 'E'
-
-        elif x[12] == '1' and x[13] == '1' and x[14] == '1' and x[15] == '1':
-            pid += 'F'
-
-    return pid
+# verifica o tamanho da mensagem, recebe toda a mensagem
+    def get_tamanho(self, bits):
+        if self.tipo == "single frame":
+            self.tamanho = str(int(bits[4:8], 2))
+        if self.tipo == "first frame":
+            self.tamanho = str(int(bits[4:16], 2))

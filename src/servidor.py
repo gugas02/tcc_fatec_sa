@@ -2,9 +2,22 @@ import requests
 from bs4 import BeautifulSoup
 
 
+
 class Server(object):
     url = 'http://gugas02.pythonanywhere.com/apiUi'
-
+    listona = ['user_id',
+              'tempAgua',
+              'pressaoTurbo',
+              'pressaoColetor0',
+              'tempAdm',
+              'pontoIgn',
+              'fluxoAr',
+              'nvlCombustivel',
+              'tempOleo',
+              'relacaoEstequiometrica',
+              'consumoInstantaneo',
+              'dtc'
+              ]
     payload = {
         'user_id': '0',
         "tempAgua": '0',
@@ -30,8 +43,8 @@ class Server(object):
         r = requests.post(url, data=payload)
         if r.status_code == requests.codes.ok:
             html_data = r.text
-            soup = BeautifulSoup.BeautifulSoup(html_data)
-            status = soup.find(attrs={'name': 'status'}).get('value')
+            soup = BeautifulSoup(html_data,"html.parser")
+            status = soup.find(attrs={'name': 'status'}).get_text()
             if status == "success":
                 user_id = soup.find(attrs={'name': 'expression'}).get('value')
                 return user_id
@@ -43,15 +56,17 @@ class Server(object):
     def setdata(self, data):
         for i in range(len(data)):
             if data[i] == 0:
-                self.payload.pop(i)
+                self.payload.pop(self.listona[i])
 
     def setvalue(self, data):
         aux = list(self.payload.keys())
         for i in range(len(aux)):
-            self.payload.update({aux[1]: str(data[i])})
+            j=0
+            self.payload.update({aux[1]: str(data[j])})
+            j+=1
 
-    def send(self, mask, value):
-        self.setdata(mask)
+    def send(self, value):
+        #self.setdata(mask)
         self.setvalue(value)
         r = requests.post(self.url, data=self.payload)
         if r.status_code == requests.codes.ok:

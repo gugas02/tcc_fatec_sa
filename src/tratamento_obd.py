@@ -2,6 +2,7 @@
 
 import time
 import serial
+import decodifica_pid
 
 
 class Obd(object):
@@ -9,11 +10,8 @@ class Obd(object):
     def __init__(self, porta, baudrate):
         self.porta = porta
         self.baud = baudrate
-
-    baud = 0
-    porta = ""
-    resposta = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    ser = serial.Serial(porta, baud, timeout=1)
+        self.resposta = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        self.ser = serial.Serial(self.porta, self.baud, timeout=1)
 
     def configura_comm(self):
         if self.ser.isOpen():
@@ -23,7 +21,7 @@ class Obd(object):
             print("Porta Serial Aberta!")
         else:
             print("Falha ao abrir a porta!")
-        exit()
+            exit()
         print("Enviando comandos:")
         self.ser.write(b'ATZ\r')
         time.sleep(0.2)
@@ -40,20 +38,21 @@ class Obd(object):
     def ect(self):
         aux = []
         result = 0
+        value = []
         for i in range(10):
             for j in range(10):
                 self.ser.flush()
                 self.ser.write(b'0105\r')
-                time.sleep(0.2)
-                value_read = self.ser.read(1024)
+                time.sleep(3)
+                value_read = str(self.ser.read(1024))
                 if value_read != 'NO DATA':
                     value_read = value_read.replace(" ", "")
                     b = value_read.find("\\r\\r")
                     a = (value_read.find('41')) + 4
-                    value = value_read[a:b]
+                    value.append(value_read[a:b])
                     break
-            if value[i] != 'NO DATA':
-                value[i] = int(value[i])
+            if value[i] != 'ODATA':
+                value[i] = int(value[i],16)
                 value[i] = value[i] - 40
                 aux.append(value[i])
         if len(value) != 0:
@@ -61,7 +60,7 @@ class Obd(object):
                 result += value[i]
             result = result/len(value)
             self.resposta[1] = 1
-            print('Temperatura do Fluido de Arrefecimento: %d °C', result)
+            print('Temperatura do Fluido de Arrefecimento: %f °C', result)
             return result
         else:
             self.resposta[1] = 0
@@ -69,20 +68,21 @@ class Obd(object):
     def turbo(self):
         aux = []
         result = 0
+        value= []
         for i in range(10):
             for j in range(10):
                 self.ser.flush()
                 self.ser.write(b'016F\r')
                 time.sleep(0.2)
-                value_read = self.ser.read(1024)
+                value_read = str(self.ser.read(1024))
                 if value_read != 'NO DATA':
                     value_read = value_read.replace(" ", "")
                     b = value_read.find("\\r\\r")
                     a = (value_read.find('41')) + 4
-                    value = value_read[a:b]
+                    value.append(value_read[a:b])
                     break
-            if value[i] != 'NO DATA':
-                value[i] = int(value[i])
+            if value[i] != 'ODATA':
+                value[i] = int(value[i],16)
                 aux.append(value[i])
         if len(value) != 0:
             for i in range(len(value)):
@@ -97,20 +97,21 @@ class Obd(object):
     def sensor_map(self):
         aux = []
         result = 0
+        value=[]
         for i in range(10):
             for j in range(10):
                 self.ser.flush()
                 self.ser.write(b'010B\r')
                 time.sleep(0.2)
-                value_read = self.ser.read(1024)
+                value_read = str(self.ser.read(1024))
                 if value_read != 'NO DATA':
                     value_read = value_read.replace(" ", "")
                     b = value_read.find("\\r\\r")
                     a = (value_read.find('41')) + 4
-                    value = value_read[a:b]
+                    value.append(value_read[a:b])
                     break
-            if value[i] != 'NO DATA':
-                value[i] = int(value[i])
+            if value[i] != 'ODATA':
+                value[i] = int(value[i],16)
                 aux.append(value[i])
         if len(value) != 0:
             for i in range(len(value)):
@@ -125,20 +126,21 @@ class Obd(object):
     def eat(self):
         aux = []
         result = 0
+        value=[]
         for i in range(10):
             for j in range(10):
                 self.ser.flush()
                 self.ser.write(b'010F\r')
                 time.sleep(0.2)
-                value_read = self.ser.read(1024)
+                value_read = str(self.ser.read(1024))
                 if value_read != 'NO DATA':
                     value_read = value_read.replace(" ", "")
                     b = value_read.find("\\r\\r")
                     a = (value_read.find('41')) + 4
-                    value = value_read[a:b]
+                    value.append(value_read[a:b])
                     break
-            if value[i] != 'NO DATA':
-                value[i] = int(value[i])
+            if value[i] != 'ODATA':
+                value[i] = int(value[i],16)
                 value[i] = value[i] - 40
                 aux.append(value[i])
         if len(value) != 0:
@@ -154,20 +156,21 @@ class Obd(object):
     def ip(self):
         aux = []
         result = 0
+        value=[]
         for i in range(10):
             for j in range(10):
                 self.ser.flush()
                 self.ser.write(b'010E\r')
                 time.sleep(0.2)
-                value_read = self.ser.read(1024)
+                value_read = str(self.ser.read(1024))
                 if value_read != 'NO DATA':
                     value_read = value_read.replace(" ", "")
                     b = value_read.find("\\r\\r")
                     a = (value_read.find('41')) + 4
-                    value = value_read[a:b]
+                    value.append(value_read[a:b])
                     break
-            if value[i] != 'NO DATA':
-                value[i] = int(value[i])
+            if value[i] != 'ODATA':
+                value[i] = int(value[i],16)
                 value[i] = (value[i]/2) - 64
                 aux.append(value[i])
         if len(value) != 0:
@@ -183,20 +186,21 @@ class Obd(object):
     def maf(self):
         aux = []
         result = 0
+        value=[]
         for i in range(10):
             for j in range(10):
                 self.ser.flush()
                 self.ser.write(b'0110\r')
                 time.sleep(0.2)
-                value_read = self.ser.read(1024)
+                value_read = str(self.ser.read(1024))
                 if value_read != 'NO DATA':
                     value_read = value_read.replace(" ", "")
                     b = value_read.find("\\r\\r")
                     a = (value_read.find('41')) + 4
-                    value = value_read[a:b]
+                    value.append(value_read[a:b])
                     break
-            if value[i] != 'NO DATA':
-                value[i] = int(value[i])
+            if value[i] != 'ODATA':
+                value[i] = int(value[i],16)
                 value[i] = value[i] / 100
                 aux.append(value[i])
         if len(value) != 0:
@@ -212,20 +216,21 @@ class Obd(object):
     def nvl_comb(self):
         aux = []
         result = 0
+        value=[]
         for i in range(10):
             for j in range(10):
                 self.ser.flush()
                 self.ser.write(b'012F\r')
                 time.sleep(0.2)
-                value_read = self.ser.read(1024)
+                value_read = str(self.ser.read(1024))
                 if value_read != 'NO DATA':
                     value_read = value_read.replace(" ", "")
                     b = value_read.find("\\r\\r")
                     a = (value_read.find('41')) + 4
-                    value = value_read[a:b]
+                    value.append(value_read[a:b])
                     break
-            if value[i] != 'NO DATA':
-                value[i] = int(value[i])
+            if value[i] != 'ODATA':
+                value[i] = int(value[i],16)
                 value[i] = 0.3921 * value[i]
                 aux.append(value[i])
         if len(value) != 0:
@@ -241,20 +246,21 @@ class Obd(object):
     def eot(self):
         aux = []
         result = 0
+        value =[]
         for i in range(10):
             for j in range(10):
                 self.ser.flush()
                 self.ser.write(b'015C\r')
                 time.sleep(0.2)
-                value_read = self.ser.read(1024)
-                if value_read != 'NO DATA':
+                value_read = str(self.ser.read(1024))
+                if value_read != 'ODATA':
                     value_read = value_read.replace(" ", "")
                     b = value_read.find("\\r\\r")
                     a = (value_read.find('41')) + 4
-                    value = value_read[a:b]
+                    value.append(value_read[a:b])
                     break
             if value[i] != 'NO DATA':
-                value[i] = int(value[i])
+                value[i] = int(value[i],16)
                 value[i] = value[i] - 40
                 aux.append(value[i])
         if len(value) != 0:
@@ -270,25 +276,26 @@ class Obd(object):
     def re(self):
         aux = []
         result = 0
+        value =[]
         for i in range(10):
             for j in range(10):
                 self.ser.flush()
                 self.ser.write(b'0106\r')
                 time.sleep(0.2)
-                value_read = self.ser.read(1024)
+                value_read = str(self.ser.read(1024))
                 if value_read != 'NO DATA':
                     value_read = value_read.replace(" ", "")
                     b = value_read.find("\\r\\r")
                     a = (value_read.find('41')) + 4
-                    value = value_read[a:b]
+                    value.append(value_read[a:b])
                     break
-            if value[i] != 'NO DATA':
-                value[i] = int(value[i])
+            if value[i] != 'ODATA':
+                value[i] = int(value[i],16)
                 value[i] = (0.78125 * value[i]) - 100
                 aux.append(value[i])
         if len(value) != 0:
             for i in range(len(value)):
-                result += value[i]
+                result += int(value[i])
             result = result/len(value)
             self.resposta[9] = 1
             print('Relação estequiométrica: %d °C', result)
@@ -301,29 +308,31 @@ class Obd(object):
         aux1 = []
         result = 0
         result1 = 0
+        value = []
+        value1 = []
         for i in range(10):
             for j in range(10):
                 self.ser.flush()
                 self.ser.write(b'015E\r')
                 time.sleep(0.2)
-                value_read = self.ser.read(1024)
+                value_read = str(self.ser.read(1024))
                 self.ser.flush()
                 self.ser.write(b'010D\r')
                 time.sleep(0.2)
-                value_read1 = self.ser.read(1024)
+                value_read1 = str(self.ser.read(1024))
                 if value_read != 'NO DATA' and value_read1 != 'NO DATA':
                     value_read = value_read.replace(" ", "")
                     b = value_read.find("\\r\\r")
                     a = (value_read.find('41')) + 4
-                    value = value_read[a:b]
+                    value.append(value_read[a:b])
                     value_read1 = value_read1.replace(" ", "")
                     b = value_read1.find("\\r\\r")
                     a = (value_read1.find('41')) + 4
-                    value1 = value_read1[a:b]
+                    value1.append(value_read[a:b])
                     break
-            if value[i] != 'NO DATA' and value1[i] != 'NO DATA':
-                value[i] = int(value[i])
-                value1[i] = int(value1[i])
+            if value[i] != 'ODATA' and value1[i] != 'NO DATA':
+                value[i] = int(value[i],16)
+                value1[i] = int(value1[i],16)
                 value[i] = (value[i]/128) - 210
                 aux.append(value[i])
                 aux1.append(value1[i])
@@ -343,37 +352,67 @@ class Obd(object):
             self.resposta[10] = 0
 
     def dtc(self):
-        aux = []
         result = 0
         self.ser.flush()
         self.ser.write(b'03\r')
         time.sleep(0.2)
-        value_read = self.ser.read(1024)
+        value_read = str(self.ser.read(1024))
         if value_read != 'NO DATA':
             value_read = value_read.replace(" ", "")
             b = value_read.find("\\r\\r")
-            a = (value_read.find('43')) + 4
+            a = (value_read.find('43')) + 2
             value = value_read[a:b]
-            value = bin(int(value))
+            aux = len(value)
+            if value == "00":
+                self.resposta[11] = 0
+                print('Sem dtc')
+                return
+            value = str(bin(int(value,16)))[2:]
+            if aux == int(len(value)/4):
+                value = decodifica_pid.Decodifica(value)
+                self.resposta[11] = 1
+                return value
+            else:
+                aux = aux - (len(value) / 4)
+                if aux == 1:
+                    aux = len(value) % 4
+                    if aux == 3:
+                        value = "0"+ value
+                    elif aux == 2:
+                        value = "00" + value
+                    elif aux == 1:
+                        value = "000" + value
+                    else:
+                        value = "0000" + value
+                if aux == 2:
+                    aux = len(value) % 4
+                    if aux == 3:
+                        value = "00000" + value
+                    elif aux == 2:
+                        value = "000000" + value
+                    elif aux == 1:
+                        value = "0000000" + value
+                    else:
+                        value = "00000000" + value
+                value = decodifica_pid.Decodifica(value)
+                self.resposta[11] = 1
+                print('DTC: %d °C', value)
+            return value
 
-            self.resposta[11] = 1
-            print('Relação estequiométrica: %d °C', result)
-            return result
-        else:
-            self.resposta[11] = 0
+
 
     def getvalue(self):
         sensors = [
             str(self.ect()),
-            str(self.turbo()),
+            #str(self.turbo()),
             str(self.sensor_map()),
             str(self.eat()),
             str(self.ip()),
-            str(self.maf()),
-            str(self.nvl_comb()),
-            str(self.eot()),
-            str(self.re()),
-            str(self.cr()),
+            #str(self.maf()),
+            #str(self.nvl_comb()),
+            #str(self.eot()),
+            #str(self.re()),
+            #str(self.cr()),
             str(self.dtc())
         ]
         for i in range(len(sensors)):
@@ -381,3 +420,15 @@ class Obd(object):
                 sensors.pop(i)
 
         return [sensors, self.resposta]
+
+
+
+
+
+
+
+
+
+
+
+

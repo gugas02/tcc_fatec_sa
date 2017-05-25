@@ -14,7 +14,7 @@ helper = help.Help()
 if len(sys.argv) < 2:
     print("nenhuma conta para login especificada")
     user = str(input("Insira seu login:"))
-    senha = str(getpass.getpass('Password:'))
+    senha = str(input('Password:'))
 else:
     user = sys.argv[0]
     senha = sys.argv[1]
@@ -23,7 +23,7 @@ else:
 user_id = sever.login(user, senha)
 if not user_id:
     sys.exit("Falha ao tentar se conectar, verifique sua conexão com a internet")
-elif user_id:
+elif user_id == True:
     sys.exit("Falha ao tentar se conectar, login ou senha invalida")
 
 obd.configura_comm()
@@ -36,20 +36,21 @@ while 1:
         dado.escreve(leitura[0])
     if upload:
         laitura = dado.ler()
-        if leitura[-1]:
-            for i in range(len(leitura) - 1, 0, -1):
-                mask = helper.str2list(leitura[i][len(leitura) - 2])
-                leitura[i].pop(len(leitura) - 2)
-                upload = sever.send(mask, leitura[i])
-                if not upload:
-                    break
+        if laitura:
+            if laitura[-1]:
+                for i in range(len(laitura) - 1, 0, -1):
+                    mask = helper.str2list(laitura[i][len(laitura) - 2])
+                    laitura[i].pop(len(laitura) - 2)
+                    upload = sever.send(mask, laitura[i])
+                    if not upload:
+                        break
+                    else:
+                        leitura[i].pop()
+                if leitura[- 1]:
+                    dado.limpa()
                 else:
-                    leitura[i].pop()
-            if leitura[- 1]:
-                dado.limpa()
-            else:
-                dado.limpa()
-                dado.escrevelinha(leitura)
+                    dado.limpa()
+                    dado.escrevelinha(laitura)
 
 
 
