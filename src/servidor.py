@@ -60,13 +60,13 @@ class Server(object):
 
     def setvalue(self, data):
         aux = list(self.payload.keys())
+        j=0
         for i in range(len(aux)):
-            j=0
-            self.payload.update({aux[1]: str(data[j])})
+            self.payload.update({aux[i]: str(data[j])})
             j+=1
 
-    def send(self, value):
-        #self.setdata(mask)
+    def send(self, mask, value):
+        self.setdata(mask)
         self.setvalue(value)
         r = requests.post(self.url, data=self.payload)
         if r.status_code == requests.codes.ok:
