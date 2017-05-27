@@ -32,9 +32,9 @@ class Server(object):
         "consumoInstantaneo": '0',
         "dtc": '0'
          }
+    config = False
 
-    @staticmethod
-    def login(user, senha):
+    def login(self, user, senha):
         url = 'http://gugas02.pythonanywhere.com/loginapi'
         payload = {
             'user': user,
@@ -47,6 +47,7 @@ class Server(object):
             status = soup.find(attrs={'name': 'status'}).get_text()
             if status == "success":
                 user_id = soup.find(attrs={'name': 'expression'}).get('value')
+                self.payload.update({'user_id': user_id})
                 return user_id
             else:
                 return True
@@ -62,11 +63,14 @@ class Server(object):
         aux = list(self.payload.keys())
         j=0
         for i in range(len(aux)):
-            self.payload.update({aux[i]: str(data[j])})
-            j+=1
+            if i>=1:
+                self.payload.update({aux[i]: str(data[j])})
+                j+=1
 
     def send(self, mask, value):
-        self.setdata(mask)
+        if not self.config:
+            self.setdata(mask)
+            self.config = True
         self.setvalue(value)
         r = requests.post(self.url, data=self.payload)
         if r.status_code == requests.codes.ok:

@@ -7,7 +7,7 @@ import help
 
 nome = "log.txt"
 dado = log.Log(nome)
-obd = tratamento_obd.Obd("COM4", 38400)
+obd = tratamento_obd.Obd("COM6", 38400)
 sever = servidor.Server()
 helper = help.Help()
 

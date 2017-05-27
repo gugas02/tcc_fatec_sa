@@ -51,7 +51,7 @@ class Obd(object):
                     a = (value_read.find('41')) + 4
                     value.append(value_read[a:b])
                     break
-            if value[i] != 'ODATA':
+            if value[i] != 'ODATA' or 'EARCHING...\\rUNABLETOCONNECT' :
                 value[i] = int(value[i],16)
                 value[i] = value[i] - 40
                 aux.append(value[i])
