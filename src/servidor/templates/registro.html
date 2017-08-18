@@ -1,0 +1,58 @@
+<html lang="pt-br">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Compartilha Can</title>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='boot.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static', filename='favicon.png')}}">
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://gugas02.pythonanywhere.com/#">
+                    <img src="{{url_for('static', filename='logo-cs.png')}}" class="img-responsive">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+        <div class="container " >
+
+            <div class="col " data-uib="layout/col" data-ver="0">
+                <div class="widget-container content-area vertical-col">
+                    <div class="table-thing widget uib_w_24 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <form action="" method="POST">
+                            <label class="narrow-control label-inline">Username</label>
+                            <input class="wide-control form-control " type="text" id="demo" name="username">
+                            <label class="narrow-control label-inline">Email</label>
+                            <input class="wide-control form-control " type="email" id="demo" name="email">
+                            <label class="narrow-control label-inline">Nome completo</label>
+                            <input class="wide-control form-control " type="text" id="demo" name="nome">
+                            <label class="narrow-control label-inline">Data de Nascimento</label>
+                            <input class="wide-control form-control " type="date" id="demo" name="dataNascimento ">
+                            <label class="narrow-control label-inline">Marca do Carro</label>
+                            <input class="wide-control form-control " type="text" id="demo" name="marcaCarro">
+                            <label class="narrow-control label-inline">Modelo do Carro</label>
+                            <input class="wide-control form-control " type="text" id="demo" name="modeloCarro">
+                            <label class="narrow-control label-inline">Ano do Carro</label>
+                            <input class="wide-control form-control " type="text" id="demo" name="anoCarro">
+                            <label class="narrow-control label-inline">Ano de Fabricação </label>
+                            <input class="wide-control form-control " type="text" id="demo" name="anoFab">
+                            <label class="narrow-control label-inline">Senha </label>
+                            <input class="wide-control form-control " type="password" id="demo" name="senha">
+                            <label class="narrow-control label-inline">Confirmação de senha </label>
+                            <input class="wide-control form-control " type="password" id="demo" name="senha">
+
+
+
+                            <input type="submit" class="btn widget uib_w_3 d-margins btn-default" value="Inscrever!">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+</body></html>

@@ -1,0 +1,305 @@
+<html lang="pt-br">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Compartilha Can</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+
+
+        <link rel="shortcut icon" href="{{url_for('static', filename='favicon.png')}}">
+        <script src="{{url_for('static', filename='Chart.min.js')}}"></script>
+
+        <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='/css/bootstrap-datetimepicker.min.css')}}">
+
+
+        <script>
+            var options = {
+                    responsive:true
+                };
+
+            var data = {
+                labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],
+                datasets: [
+                    {
+                        label: "Dados primários",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: []
+                    }
+                ]
+            };
+            var data1 = {
+                labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],
+                datasets: [
+                    {
+                        label: "Dados primários",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: []
+                    }
+                ]
+            };
+            var data2 = {
+                labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],
+                datasets: [
+                    {
+                        label: "Dados primários",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: []
+                    }
+                ]
+            };
+            var data3 = {
+                labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],
+                datasets: [
+                    {
+                        label: "Dados primários",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: []
+                    }
+                ]
+            };
+            function setvalues(dados)
+            {
+                data.datasets[0].data = dados
+                //window.alert(data.datasets[0].data);
+                var arrayLength = data.datasets[0].data.length;
+                for (var i = 0; i < arrayLength; i++)
+                {
+                    //window.alert(typeof(data.datasets[0].data[i]));
+                    data.datasets[0].data[i] = Number(data.datasets[0].data[i]);
+                    //window.alert(data.datasets[0].data[i]);
+                    if(isNaN(data.datasets[0].data[i]))
+                    {
+                        data.datasets[0].data.splice(i,1);
+                    }
+                }
+                //window.alert(arrayLength);
+                if(arrayLength > 26)
+                {
+                    aux = arrayLength - 26;
+                    //window.alert(aux);
+                    data.datasets[0].data.splice(0,aux-1);
+                }
+                //window.alert(data.datasets[0].data);
+                var ctx = document.getElementById("GraficoLine").getContext("2d");
+                var LineChart = new Chart(ctx).Line(data, options);
+            }
+            function setvalues1(dados)
+            {
+                data1.datasets[0].data = dados
+                //window.alert(data1.datasets[0].data);
+                var arrayLength = data1.datasets[0].data.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    //window.alert(typeof(data1.datasets[0].data[i]));
+                    data1.datasets[0].data[i] = Number(data1.datasets[0].data[i]);
+                    //window.alert(data1.datasets[0].data[i]);
+                    if(isNaN(data1.datasets[0].data[i])){
+                        data1.datasets[0].data.splice(i,1);
+                    }
+                }
+                //window.alert(arrayLength);
+                if(arrayLength > 26)
+                {
+                    aux1 = arrayLength - 26;
+                    //window.alert(aux);
+                    data1.datasets[0].data.splice(0,aux1);
+                }
+                //window.alert(data1.datasets[0].data);
+                var ctx1 = document.getElementById("GraficoLine1").getContext("2d");
+                var LineChart1 = new Chart(ctx1).Line(data1, options);
+            }
+            function setvalues2(dados)
+            {
+                //window.alert('2');
+                data2.datasets[0].data = dados
+                //window.alert(data2.datasets[0].data);
+                var arrayLength = data2.datasets[0].data.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    //window.alert(typeof(data2.datasets[0].data[i]));
+                    data2.datasets[0].data[i] = Number(data2.datasets[0].data[i]);
+                    //window.alert(data2.datasets[0].data[i]);
+                    if(isNaN(data2.datasets[0].data[i])){
+                        data2.datasets[0].data.splice(i,1);
+                    }
+                }
+                //window.alert(arrayLength);
+                if(arrayLength > 26)
+                {
+                    aux = arrayLength - 26;
+                    //window.alert(aux);
+                    data2.datasets[0].data.splice(0,aux);
+                }
+                //window.alert(data.datasets[0].data);
+                var ctx2 = document.getElementById("GraficoLine2").getContext("2d");
+                var LineChart2 = new Chart(ctx2).Line(data2, options);
+            }
+            function setvalues3(dados)
+            {
+                data3.datasets[0].data = dados
+                //window.alert(data3.datasets[0].data);
+                var arrayLength = data3.datasets[0].data.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    //window.alert(typeof(data3.datasets[0].data[i]));
+                    data3.datasets[0].data[i] = Number(data3.datasets[0].data[i]);
+                    //window.alert(data3.datasets[0].data[i]);
+                    if(isNaN(data3.datasets[0].data[i])){
+                        data3.datasets[0].data.splice(i,1);
+                    }
+                }
+                //window.alert(arrayLength);
+                if(arrayLength > 26)
+                {
+                    aux = arrayLength - 26;
+                    //window.alert(aux);
+                    data3.datasets[0].data.splice(0,aux);
+                }
+                //window.alert(data3.datasets[0].data);
+                var ctx3 = document.getElementById("GraficoLine3").getContext("2d");
+                var LineChart = new Chart(ctx3).Line(data3, options);
+            }
+            window.onload = function(){
+                $.getJSON("http://gugas02.pythonanywhere.com/getip", setvalues);
+                $.getJSON("http://gugas02.pythonanywhere.com/getect", setvalues1);
+                $.getJSON("http://gugas02.pythonanywhere.com/getsensor_map", setvalues2);
+                $.getJSON("http://gugas02.pythonanywhere.com/geteat", setvalues3);
+            }
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header col-md-12">
+                    <div class="col-md-11">
+                        <a class="navbar-brand" href="http://gugas02.pythonanywhere.com/#">
+                            <img src="{{url_for('static', filename='logo-cs.png')}}" class="img-responsive">
+                        </a>
+                    </div>
+                    <div class="col-md-1">
+                        <a href="{{url_for("logout")}}" class="btn btn-info" style="margin-top:10px;">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container " >
+            <div class="col-md-6 ">
+                <div>
+                    <div class="col-md-12">
+                        <h3>Ponto de ignição (º)</h3>
+                        <h4>Dado em Graus por unidade de amostra</h4>
+                        <div class="box-chart">
+                            <canvas id="GraficoLine" style="width:100%;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div>
+                    <div class="col-md-12" >
+                        <h3>Liquido de arrefecimento (ºC)</h3>
+                        <h4>Dado em Graus Celsios por unidade de amostra</h4>
+                        <div class="box-chart">
+                            <canvas id="GraficoLine1" style="width:100%;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container " >
+            <div class="col-md-6 ">
+                <div>
+                    <div class="col-md-12" >
+                        <h3>Pressão no coletor de admissão (kPa)</h3>
+                        <h4>Dado em Quilopascal por unidade de amostra</h4>
+                        <div class="box-chart">
+                            <canvas id="GraficoLine2" style="width:100%;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div>
+                    <div class="col-md-12" >
+                        <h3>Temperatura do no coletor de admissão (ºC)</h3>
+                        <h4>Dado em Graus Celsios por unidade de amostra</h4>
+                        <div class="box-chart">
+                            <canvas id="GraficoLine3" style="width:100%;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <form action="" class="form-horizontal"  role="form">
+                <fieldset>
+                    <legend>Consulta por data e hora</legend>
+                    <div class="form-group">
+                        <label for="dtp_input1" class="col-md-3 control-label">Inicio</label>
+                        <div class="input-group date form_datetime col-md-6" data-date="2017-06-30F05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1" id="form_datetime">
+                            <input class="form-control" size="16" type="text" value="" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                        </div>
+                        <input type="hidden" id="dtp_input1" value="" /><br/>
+                    </div>
+                    <div class="form-group">
+                        <label for="dtp_input1" class="col-md-3 control-label">Fim</label>
+                        <div class="input-group date form_datetime col-md-6" data-date="2017-06-30F05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1"id="form_datetime2">
+                            <input class="form-control" size="16" type="text" value="" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                        </div>
+                        <input type="hidden" id="dtp_input1" value="" /><br/>
+                    </div>
+                    <input type="submit" class="btn btn-info widget uib_w_3 col-md-offset-5 d-margins btn-default" value="Consultar!">
+                </fieldset>
+            </form>
+        </div>
+
+        <script src="{{url_for('static', filename='/css/jquery-1.8.3.min.js')}}"></script>
+        <script src="{{url_for('static', filename='/css/bootstrap.min.js')}}"></script>
+        <script src="{{url_for('static', filename='/css/bootstrap-datetimepicker.js')}}"></script>
+        <script src="{{url_for('static', filename='/css/bootstrap-datetimepicker.pt-BR.js')}}"></script>
+
+        <script type="text/javascript">
+            $('#form_datetime').datetimepicker({
+                language:  'pt-BR',
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                forceParse: 0,
+                showMeridian: 1
+            });
+            $('#form_datetime2').datetimepicker({
+                language:  'pt-BR',
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                forceParse: 0,
+                showMeridian: 1
+            });
+        </script>
+    </body>
+</html>

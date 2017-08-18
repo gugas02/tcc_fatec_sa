@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Compartilha Can</title>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+    <script src="{{url_for('static', filename='scripts.js(1).download')}}"></script>
+    <link rel="shortcut icon" href="{{url_for('static', filename='favicon.png')}}">
+</head>
+
+<body style="margin-top: -20px;">
+
+
+
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="pattern"></div>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">
+                    <img src="{{url_for('static', filename='logo-cs.png')}}" class="img-responsive">
+                </a>
+            </div>
+
+
+            <div class="collapse navbar-collapse" id="navbar">
+                <div class="navbar-top">
+                    <form action="" method="get" class="form-inline" role="form">
+                        <a href="{{url_for("login")}}" target="_blank" class="btn btn-default btn-sm btn-outline text-uppercase" data-toggle="popover" data-trigger="hover" data-placement="bottom" title="">Portal do Cliente</a>
+                        <div class="form-group inner-addon inner-addon-sm right-addon">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            <input type="text" value="" name="s" class="form-control input-sm border-none" placeholder="search">
+                        </div>
+                    </form>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="">Empresa</a><span></span></li>
+                    <li><a href="">Clientes</a><span></span></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="">Soluções</a><span></span>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <ul>
+                                    <li>
+                                        <a href="">Compartilha Can</a>
+                                    </li>
+                                    <li>
+                                        <a href="">My calculator</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Consultoria</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li style="background-image:url({{url_for('static', filename='bi-1.jpg')}}">
+                                <h4>Canshare v1.0<br></h4>
+                                <h7>implante na sua empresa.<br></h7>
+
+                                <a href="" class="btn btn-default btn-sm btn-outline text-uppercase size-12" style="width: 94px;padding: 5px;font-size:12px;">saiba mais</a>
+
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><a href="">Newsletter</a><span></span></li>
+                    <li><a href="">Forum</a><span></span></li>
+                    <li><a href="">Contato</a><span></span></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="banner">
+    <div id="carouselHome" class="carousel carousel-fade slide" data-ride="carousel">
+        <div class="bottom">
+            <div class="container">
+                <ol class="carousel-indicators">
+                                     <li data-target="#carouselHome" data-slide-to="0" class="active"></li>
+                                </ol>
+            </div>
+        </div>
+        <div class="carousel-inner" role="listbox">
+                        <div class="item active" style="background-image: url({{url_for('static', filename='banner-home-1024x483-1-1024x483.jpg')}}">
+                <div class="container">
+                    <div class="vcenter">
+                        <div class="text">
+                            <h2>Canshare v1.0</h2>
+                            <p>
+    <b>O mais novo software de gestão e controle de frotas</b><br>
+    otimizado para todos os publicos.
+</p>
+<p>
+    Conheça os nossos diferenciais e o que podemos fazer para melhorar sua vivência com seu veículo</p>
+                        </div>
+                        <div class="links">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <a href=""><span class="icon icon-passageiros icon-size-50"></span> <span>     b2b</span></a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href=""><span class="icon icon-cargas icon-size-50"></span> <span>      b2c</span></a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a href="" target="_blank" class="btn btn-default text-uppercase bt-agendar-demonstracao">AGENDAR DEMONSTRAÇÃO</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding-bottom:40px;"></div>
+            </div>
+                    </div>
+    </div>
+</section>
+    <section class="video">
+        <section class="bus">
+            <div data-stellar-ratio="2" class="bus-left horizontal-parallax-left display-block" style="display: none; left: -450px; right: initial;"></div>
+            <div data-stellar-ratio="2" class="bus-right horizontal-parallax-right display-block" style="display: none; left: initial; right: -450px;"></div>
+        </section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h2>
+                        Como o <br>
+                        <b>Canshare v1.0</b> <br>
+                        ajudará a sua empresa?
+                    </h2>
+                    <h6>Com o Canshare v1.0, diversas incovenientes são solucionados, gerando maior produtividade ao negócio, agilidade e produtividade no seu dia-a-dia.</h6>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="box-blog">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-push-2 text-center">
+                <h2>acompanhe <b>nosso forum</b></h2>
+                <h6>Conteúdos exclusívos, últimas noticías sobre produtos e <br> serviços, duvidas frequentes, implementações,troca de informações entre usuários entre outras vantagens.</h6>
+            </div>
+        </div>
+
+</section>
+
+</section>
+
+    <section class="news">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h2 data-scroll-reveal="move 50px wait 0.3s">assine <b>nossa newsletter</b></h2>
+                <div role="form" class="wpcf7" id="wpcf7-f5-o1" lang="pt-BR" dir="ltr">
+                    <div class="screen-reader-response"></div>
+                    <form action="" method="post" class="wpcf7-form form-inline" novalidate="novalidate">
+                        <div style="display: none;">
+                            <input type="hidden" name="_wpcf7" value="5">
+                            <input type="hidden" name="_wpcf7_version" value="4.4.2">
+                            <input type="hidden" name="_wpcf7_locale" value="pt_BR">
+                            <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f5-o1">
+                            <input type="hidden" name="_wpnonce" value="e794c077a8">
+                        </div>
+                        <div class="form-group">
+                            <span class="wpcf7-form-control-wrap nome">
+                                <input type="text" name="nome" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Nome">
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <span class="wpcf7-form-control-wrap email">
+                                <input type="email" name="email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control" aria-required="true" aria-invalid="false" placeholder="E-mail">
+                            </span>
+                        </div>
+
+                        <p>
+                        <button type="submit" class="btn btn-default btn-gradient text-uppercase">Assinar</button>
+                        </p>
+
+                        <div class="wpcf7-response-output wpcf7-display-none"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+<div class="container">
+
+
+
+
+
+
+
+<div class="container">
+            <div class="row footer-top">
+                <div class="col-sm-2">
+                    <a href="">
+                        <img src="" class="img-responsive logo">
+                    </a>
+                </div>
+                <div class="col-sm-8">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+                            <a>sp (11) 5018-2525 </a>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a>contato@compartilhacan.com </a>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <a href="" target="_blank" class="redesocial">
+                        <img src="{{url_for('static', filename='linkedin.png')}}" class="img-responsive">
+                    </a>
+                    <a href="" target="_blank" class="redesocial">
+                        <img src="{{url_for('static', filename='facebook.png')}}" class="img-responsive">
+                    </a>
+                    <a href="" target="_blank" class="redesocial">
+                        <img src="{{url_for('static', filename='youtube.png')}}" class="img-responsive">
+                    </a>
+                    <a href="" target="_blank" class="redesocial">
+                        <img src="{{url_for('static', filename='twitter.png')}}" class="img-responsive">
+                    </a>
+                </div>
+                <div class="line"></div>
+            </div>
+
+
+
+
+
+
+        <div class="row">
+                <div class="col-sm-12">
+                    <nav>
+
+
+
+
+
+
+
+<ul>
+                            <li>
+                                <a>Empresa</a>
+                                <ul>
+                                    <li>
+                                        <a href="">Quem Somos</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="">Soluções</a>
+                                <ul>
+                                    <li>
+                                        <a href="">Canshare v1.0</a>
+                                    </li>
+                                    <li>
+                                        <a href="">My Calculator</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Consultoria</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="">forum</a>
+                            </li>
+                            <li>
+                                <a href="">Contato</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+

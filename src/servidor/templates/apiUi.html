@@ -1,0 +1,75 @@
+<html>
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <link rel="stylesheet" href="{{url_for('static', filename='boot.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static', filename='favicon.png')}}">
+
+
+        </head>
+
+    <body>
+        <nav class="navbar navbar-inverse">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="http://gugas02.pythonanywhere.com/#">My Calculator</a>
+            </div>
+          </div>
+        </nav>
+
+        <div class="container " >
+
+            <div class="col " data-uib="layout/col" data-ver="0">
+                <div class="widget-container content-area vertical-col">
+                    <div class="table-thing widget uib_w_24 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <form action="" method="POST">
+                            <label class="narrow-control label-inline">user_id</label>
+                            <input class="wide-control form-control " type="text" id="demo" name="user_id">
+                            <label class="narrow-control label-inline">consumoMedio</label>
+                            <input class="wide-control form-control " type="text" id="demo" name="consumoMedio">
+                            <label class="narrow-control label-inline">pressaoTurbo</label>
+                            <input class="wide-control form-control " type="text" id="demo" name="pressaoTurbo">
+                            <label class="narrow-control label-inline">tempAgua </label>
+                            <input class="wide-control form-control " type="text" id="demo" name="tempAgua">
+                            <label class="narrow-control label-inline">pressaoColetor </label>
+                            <input class="wide-control form-control " type="text" id="demo" name="pressaoColetor">
+                            <label class="narrow-control label-inline">tempAdm </label>
+                            <input class="wide-control form-control " type="text" id="demo" name="tempAdm">
+                            <label class="narrow-control label-inline">pontoIgn </label>
+                            <input class="wide-control form-control " type="text" id="demo" name="pontoIgn">
+                            <label class="narrow-control label-inline">fluxoAr </label>
+                            <input class="wide-control form-control " type="text" id="demo" name="fluxoAr">
+                            <label class="narrow-control label-inline">nvlCombustivel </label>
+                            <input class="wide-control form-control " type="text" id="demo" name="nvlCombustivel">
+                            <label class="narrow-control label-inline">dtc </label>
+                            <input class="wide-control form-control " type="text" id="demo" name="dtc">
+                            <label class="narrow-control label-inline">tempOleo </label>
+                            <input class="wide-control form-control " type="text" id="demo" name="tempOleo">
+                            <label class="narrow-control label-inline">relacaoEstequiometrica </label>
+                            <input class="wide-control form-control " type="text" id="demo" name="relacaoEstequiometrica">
+                            <label class="narrow-control label-inline">consumoInstantaneo </label>
+                            <input class="wide-control form-control " type="text" id="demo" name="consumoInstantaneo">
+                            <label class="narrow-control label-inline">marchaNConforme </label>
+                            <input class="wide-control form-control " type="text" id="demo" name="marchaNConforme">
+
+
+
+                            <input type="submit" class="btn widget uib_w_3 d-margins btn-default" value="=">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+</body></html>
